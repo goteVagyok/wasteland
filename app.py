@@ -27,6 +27,7 @@ pg.key.set_repeat(200, 100)
 
 # prev_time = time()
 
+# testing ssh auth form manjaro machine
 
 while RUN:
 
