@@ -1,12 +1,10 @@
 import pygame as pg
 from utils.globals import Globals
 
-
 Globals = Globals()
 
 
 class Sprite:
-
 
     def __init__(self, path_to_texture, x: int, y: int, has_animation: bool):
         """

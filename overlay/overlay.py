@@ -15,15 +15,12 @@ class OverlayComponent(Sprite):
 
         self.shown = False
 
-
     def toggle_shown(self, event, hotkey):
         if event.type == pg.KEYDOWN:
             if event.key == hotkey:
                 self.shown = not self.shown
 
-
     def show_component(self, event, hotkey, screen):
         self.toggle_shown(event, hotkey)
         if self.shown:
             self.draw(screen)
-

@@ -1,6 +1,9 @@
 # wasteland main project file
 
 import os
+
+from items.longsword import LongSword
+
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "True"
 
 import pygame as pg
@@ -19,15 +22,14 @@ RUN = True
 game_world = GameWorld()
 
 player = Player(0, 0, 100)
+player.inventory.add_item(LongSword(100, 100))
 
-game_world.container[player.tx][player.ty].container.append(player)
+game_world.tile_container[player.tx][player.ty].container.append(player)
 
 
 pg.key.set_repeat(200, 100)
 
 # prev_time = time()
-
-# testing ssh auth form manjaro machine
 
 while RUN:
 
@@ -45,6 +47,7 @@ while RUN:
         prev_ty = player.ty
 
         game_world.move_entity(player, (prev_tx, prev_ty), event)
+        game_world.handle_player_ui_elements(player, event)
         # player.toggle_inventory_screen(event, WINDOW.screen)
 
         game_world.update(WINDOW.screen)

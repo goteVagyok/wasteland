@@ -2,10 +2,10 @@ import pygame as pg
 
 from assets.texture_enum.textures import Textures
 from entity.entity import Entity
+from overlay.player_inventory.inventory_overlay import Inventory
 from settings.settings import Settings
 from sprite.sprite import Sprite
 from utils.globals import Globals
-
 
 Globals = Globals()
 
@@ -19,8 +19,9 @@ class Player(Entity):
                          hp,
                          has_animation=True)
 
+        self.inventory = Inventory()
         self.segment = Sprite(Textures.INVENTORY_SEGMENT, 100, 100, False)
-
+        self.inventory_shown = False
 
     def move(self, event: pg.event) -> tuple[int, int]:
         """
@@ -58,14 +59,7 @@ class Player(Entity):
 
         return target_x, target_y
 
-
-    def toggle_inventory_screen(self, event: pg.event, screen):
-        shown = False
+    def toggle_inventory_screen(self, event: pg.event):
         if event.type == pg.KEYDOWN:
-            if event.key == pg.K_e:
-                shown = not shown
-                print(shown)
-
-        if shown:
-            Globals.debug("inventory shown.")
-            self.segment.draw(screen)  # TODO needs to be drawn above game_world to be visible
+            if event.key == Settings.key_toggle_inventory:
+                self.inventory_shown = not self.inventory_shown
