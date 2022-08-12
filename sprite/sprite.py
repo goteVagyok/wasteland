@@ -23,5 +23,10 @@ class Sprite:
 
         self.rect = pg.rect.Rect(self.x, self.y, self.texture.get_width(), self.texture.get_height())
 
+    @staticmethod
+    def path_to_texture(path):
+        tmp = path.value
+        return pg.image.load(tmp).convert_alpha()
+
     def draw(self, screen):
         screen.blit(self.texture, self.rect)

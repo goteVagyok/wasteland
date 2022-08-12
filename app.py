@@ -13,6 +13,8 @@ from utils.globals import Globals
 from window.window import Window
 from world.world import GameWorld
 
+# TODO scale everything up by like 200%
+
 Globals = Globals()
 
 Globals.debug("run script.")
@@ -29,15 +31,9 @@ game_world.tile_container[player.tx][player.ty].container.append(player)
 
 pg.key.set_repeat(200, 100)
 
-# prev_time = time()
-
 while RUN:
 
     WINDOW.update()
-
-    # now = time()
-    # Globals.dt = now - prev_time
-    # prev_time = now
 
     for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -48,6 +44,5 @@ while RUN:
 
         game_world.move_entity(player, (prev_tx, prev_ty), event)
         game_world.handle_player_ui_elements(player, event)
-        # player.toggle_inventory_screen(event, WINDOW.screen)
 
         game_world.update(WINDOW.screen)

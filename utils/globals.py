@@ -1,3 +1,4 @@
+import pygame as pg
 from datetime import datetime
 import os
 
@@ -18,3 +19,7 @@ class Globals:
         if self.DEBUG:
             time = datetime.now().strftime("%H:%M:%S")
             print(f"[{time}] {msg}")
+
+
+def path_to_texture(path):
+    return pg.image.load(path.value).convert_alpha()

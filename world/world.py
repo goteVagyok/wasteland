@@ -48,12 +48,10 @@ class GameWorld:
 
             if player.inventory not in self.UI_container:
                 self.UI_container.append(player.inventory)
-                Globals.debug("player inv. added to UI_container")
 
         else:
             if player.inventory in self.UI_container:
                 self.UI_container.pop(self.UI_container.index(player.inventory))
-                Globals.debug("player inv. removed form UI_container")
 
     def update(self, screen):
         for row in self.tile_container:
