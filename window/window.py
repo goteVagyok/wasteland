@@ -13,8 +13,6 @@ class Window:
 
         # TODO make resized window be filled with tiles / scaled
 
-
     @staticmethod
     def update() -> None:
         pg.display.flip()
-

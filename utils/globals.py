@@ -9,8 +9,8 @@ class Globals:
         self.DEBUG = True
         self.cwd = os.getcwd()
         self.texture_path = f"{self.cwd}/assets/"
-        self.tile_width = 25
-        self.tile_height = 25
+        self.tile_width = 100
+        self.tile_height = 100
         self.window_width = 800
         self.window_height = 600
         self.dt: float  # undefined at start

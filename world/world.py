@@ -16,7 +16,7 @@ class GameWorld:
         for x in range(0, Globals.window_width, Globals.tile_width):
             row = []
             for y in range(0, Globals.window_height, Globals.tile_height):
-                if x == 50 and y == 50:
+                if x == 200 and y == 200:
                     row.append(Blockade(x, y))
                 else:
                     row.append(Tile(x, y, Textures.TILE))
@@ -52,6 +52,7 @@ class GameWorld:
         else:
             if player.inventory in self.UI_container:
                 self.UI_container.pop(self.UI_container.index(player.inventory))
+                # TODO turn this into a dict
 
     def update(self, screen):
         for row in self.tile_container:

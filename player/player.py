@@ -2,12 +2,12 @@ import pygame as pg
 
 from assets.texture_enum.textures import Textures
 from entity.entity import Entity
-from overlay.player_inventory.inventory_overlay import Inventory
+from overlay.player_inventory.inventory import Inventory
 from settings.settings import Settings
-from sprite.sprite import Sprite
 from utils.globals import Globals
 
 Globals = Globals()
+Globals.DEBUG = False
 
 
 class Player(Entity):
@@ -20,7 +20,8 @@ class Player(Entity):
                          has_animation=True)
 
         self.inventory = Inventory()
-        self.segment = Sprite(Textures.INVENTORY_SEGMENT, 100, 100, False)
+        self.inventory.add_segment(5)
+        self.inventory.container.reverse()
         self.inventory_shown = False
 
     def move(self, event: pg.event) -> tuple[int, int]:

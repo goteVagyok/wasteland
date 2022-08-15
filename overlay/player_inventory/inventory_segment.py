@@ -11,10 +11,12 @@ Globals = Globals()
 class InventorySegment(OverlayComponent):
 
     def __init__(self):
-        super().__init__(100, 100, Textures.INVENTORY_SEGMENT)
+        super().__init__(0, 0, Textures.INVENTORY_SEGMENT)
         self.container: list[Item] = []
         self.normal_texture = path_to_texture(Textures.INVENTORY_SEGMENT)
         self.highlighted_texture = path_to_texture(Textures.INVENTORY_SEGMENT_HIGHLIGHTED)
+        self.has_item = False
+        self.num_of_items = 0
 
     def highlight_segment_background(self):
         if self.rect.collidepoint(pg.mouse.get_pos()):
@@ -35,6 +37,9 @@ class InventorySegment(OverlayComponent):
         item.rect.y = item.y
 
         self.container.append(item)
+        self.has_item = True
+        self.num_of_items += 1
+        # TODO display number of items by using textures=chars/ the corresponding number
 
     def draw(self, screen):
         self.highlight_segment_background()

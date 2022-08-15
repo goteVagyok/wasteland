@@ -10,8 +10,6 @@ class OverlayComponent(Sprite):
 
     def __init__(self, x, y, texture):
         super().__init__(texture, x, y, False)
-        self.x = x
-        self.y = y
 
         self.shown = False
 
