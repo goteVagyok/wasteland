@@ -3,7 +3,7 @@ import pygame as pg
 from assets.texture_enum.textures import Textures
 from items.item import Item
 from overlay.overlay import OverlayComponent
-from utils.globals import Globals, path_to_texture
+from utils.globals import Globals, path_to_texture, Colors
 
 Globals = Globals()
 
@@ -17,17 +17,14 @@ class InventorySegment(OverlayComponent):
         self.highlighted_texture = path_to_texture(Textures.INVENTORY_SEGMENT_HIGHLIGHTED)
         self.has_item = False
         self.num_of_items = 0
+        self.num_of_items_font = Globals.mono_font.render(str(self.num_of_items), 0, Colors.black)
+        self.num_of_items_pos = (0, 0)
 
     def highlight_segment_background(self):
         if self.rect.collidepoint(pg.mouse.get_pos()):
             self.texture = self.highlighted_texture
         else:
             self.texture = self.normal_texture
-
-    @staticmethod
-    def handle_mouse_event(self, event: pg.event):
-        if event.type == pg.MOUSEBUTTONDOWN:
-            pass
 
     def add_item(self, item: Item):
         # center the item in the segment
@@ -37,12 +34,15 @@ class InventorySegment(OverlayComponent):
         item.rect.y = item.y
 
         self.container.append(item)
+        Globals.debug(f"item added: {item}")
         self.has_item = True
         self.num_of_items += 1
-        # TODO display number of items by using textures=chars/ the corresponding number
+        self.num_of_items_font = Globals.mono_font.render(str(self.num_of_items), 0, Colors.black)
 
     def draw(self, screen):
         self.highlight_segment_background()
         screen.blit(self.texture, self.rect)
-        for item in self.container:
-            item.draw(screen)
+
+        if self.num_of_items > 0:
+            self.container[0].draw(screen)
+            screen.blit(self.num_of_items_font, self.num_of_items_pos)

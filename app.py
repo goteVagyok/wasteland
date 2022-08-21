@@ -13,8 +13,6 @@ from utils.globals import Globals
 from window.window import Window
 from world.world import GameWorld
 
-# TODO scale everything up by like 200%
-
 Globals = Globals()
 
 Globals.debug("run script.")
@@ -24,7 +22,9 @@ RUN = True
 game_world = GameWorld()
 
 player = Player(0, 0, 100)
-player.inventory.add_item(LongSword(100, 100))
+for i in range(15):
+    player.inventory.add_item(LongSword(100, 100).get())
+    # TODO fix the inventory capacity overflowing when adding eg.: 100 items
 
 game_world.tile_container[player.tx][player.ty].container.append(player)
 

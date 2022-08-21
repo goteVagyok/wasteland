@@ -1,4 +1,4 @@
-from utils.globals import Globals
+from utils.globals import Globals, UIElementIds
 from assets.texture_enum.textures import Textures
 
 from world.tile import Tile
@@ -11,7 +11,7 @@ class GameWorld:
 
     def __init__(self):
         self.tile_container: list[list[Tile | Blockade]] = []  # container for all world elements (eg.: Tiles, etc)
-        self.UI_container = []  # container for all ui elements such as inventory and esc menu overlay
+        self.UI_container = {}  # container for all ui elements such as inventory and esc menu overlay
 
         for x in range(0, Globals.window_width, Globals.tile_width):
             row = []
@@ -46,18 +46,20 @@ class GameWorld:
 
         if player.inventory_shown:
 
-            if player.inventory not in self.UI_container:
-                self.UI_container.append(player.inventory)
+            if player.inventory not in self.UI_container.values():
+                self.UI_container.update({UIElementIds.player_inventory_id: player.inventory})
+                # for x in self.UI_container.values():
+                #     for y in x.container:
+                #         print(y.has_item)
 
         else:
-            if player.inventory in self.UI_container:
-                self.UI_container.pop(self.UI_container.index(player.inventory))
-                # TODO turn this into a dict
+            if player.inventory in self.UI_container.values():
+                del self.UI_container[UIElementIds.player_inventory_id]
 
     def update(self, screen):
         for row in self.tile_container:
             for e in row:
                 e.draw(screen)
 
-        for element in self.UI_container:
+        for element in self.UI_container.values():
             element.draw(screen)

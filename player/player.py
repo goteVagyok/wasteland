@@ -20,8 +20,8 @@ class Player(Entity):
                          has_animation=True)
 
         self.inventory = Inventory()
-        self.inventory.add_segment(5)
-        self.inventory.container.reverse()
+        self.inventory.add_segment(4)
+        # self.inventory.container.reverse()
         self.inventory_shown = False
 
     def move(self, event: pg.event) -> tuple[int, int]:
